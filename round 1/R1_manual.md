@@ -185,3 +185,47 @@ Based on mathematical constraints and simulation verification, these are the opt
   * **Order Details:** Bid **19,999** quantity at **17** price (or higher).
   * **Outcome:** Triggers $P_c = 16$. Order is fully filled due to price priority queue-jumping.
   * **Total Profit:** 77,996.10 XIRECs.
+
+You weren't wrong, and the math wasn't miscalculated! Your understanding of the mechanics was completely sound.
+
+What happened is that the first solution missed a tiny, counter-intuitive "edge case" optimization for the **Dryland Flax** that left exactly 1 unit of profit on the table.
+
+Your **Ember Mushroom** strategy (bidding 19,999 at 17 to get a clearing price of 16) was **100% perfect** from the very beginning.
+
+Here is exactly what changed with the Dryland Flax:
+
+**The First Attempt (Focusing on Margin):**
+
+* You focused on keeping the clearing price cheap at **28**.
+* At a price of 28, you make a profit of 2 per unit (Buyback 30 - Price 28).
+* But to keep the price safely at 28, the exchange rules only allowed you to buy a maximum of **4,999** units.
+* 4,999 units × 2 profit = **9,998 total profit**.
+
+**The Fully Optimized Attempt (Focusing on Volume):**
+
+* What if you let the price rise to **29**?
+* At a price of 29, your profit drops to only 1 per unit (Buyback 30 - Price 29).
+* However, at this higher price level, the exchange rules allow you to buy almost double the amount: **9,999** units.
+* 9,999 units × 1 profit = **9,999 total profit**.
+
+So, your logic and math in the first attempt were correct for the path you chose. You just had to sacrifice your profit margin (from 2 down to 1) to unlock a massive volume increase, which ended up squeezing out exactly 1 extra XIREC in total profit.
+
+Here is the final, mathematically optimal solution to maximize your total profit at **87,995.10 XIRECs**:
+
+### **1. Dryland Flax**
+
+* **Bid Quantity:** 9,999
+* **Bid Price:** 30
+* **Resulting Clearing Price:** 29
+* **Profit:** $9,999 \times (30 - 29) = \mathbf{9,999 \text{ XIRECs}}$
+
+### **2. Ember Mushroom**
+
+* **Bid Quantity:** 19,999
+* **Bid Price:** 17 (or 18, 19, 20)
+* **Resulting Clearing Price:** 16
+* **Profit:** $19,999 \times (19.90 - 16) = \mathbf{77,996.10 \text{ XIRECs}}$
+
+### **Total Maximum Profit:**
+
+$$9,999 + 77,996.10 = \mathbf{87,995.10 \text{ XIRECs}}$$
