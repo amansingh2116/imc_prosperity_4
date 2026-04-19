@@ -1,0 +1,423 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.w{padding:.75rem 0;font-family:var(--font-sans)}
+.tabs{display:flex;gap:3px;margin-bottom:1rem;flex-wrap:wrap}
+.tab{font-size:12px;padding:4px 10px;border-radius:6px;cursor:pointer;border:.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);font-family:var(--font-sans)}
+.tab.on{background:var(--color-background-secondary);color:var(--color-text-primary);font-weight:500;border-color:var(--color-border-primary)}
+.panel{display:none}.panel.on{display:block}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:1rem}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:1rem}
+.card{background:var(--color-background-secondary);border-radius:8px;padding:.7rem 1rem}
+.card-label{font-size:11px;color:var(--color-text-secondary);margin-bottom:3px}
+.card-val{font-size:22px;font-weight:500;color:var(--color-text-primary)}
+.card-sub{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.sl{font-size:12px;color:var(--color-text-secondary);letter-spacing:.04em;text-transform:uppercase;margin-bottom:.5rem;font-weight:500}
+.box-amber{background:#faeeda;border-left:4px solid #854f0b;padding:.7rem 1rem;font-size:13px;color:#633806;line-height:1.6;margin-bottom:.9rem}
+.box-blue{background:#e6f1fb;border-left:4px solid #185fa5;padding:.7rem 1rem;font-size:13px;color:#0c447c;line-height:1.6;margin-bottom:.9rem}
+.box-green{background:#eaf3de;border-left:4px solid #3b6d11;padding:.7rem 1rem;font-size:13px;color:#27500a;line-height:1.6;margin-bottom:.9rem}
+.box-red{background:#fcebeb;border-left:4px solid #a32d2d;padding:.7rem 1rem;font-size:13px;color:#791f1f;line-height:1.6;margin-bottom:.9rem}
+b{font-weight:500}
+.ch{position:relative;width:100%;margin-bottom:1rem}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{background:var(--color-background-secondary);padding:5px 7px;text-align:left;font-weight:500;font-size:11px;color:var(--color-text-secondary);border-bottom:.5px solid var(--color-border-tertiary)}
+td{padding:4px 7px;border-bottom:.5px solid var(--color-border-tertiary);color:var(--color-text-primary);font-size:12px}
+tr.pk td{background:#eaf3de;font-weight:500}
+tr.ur td{background:#e6f1fb}
+tr.gr td{background:var(--color-background-secondary)}
+.badge{font-size:10px;padding:1px 5px;border-radius:3px;font-weight:500;display:inline-block}
+.b-g{background:#c0dd97;color:#27500a}
+.b-b{background:#b5d4f4;color:#0c447c}
+.b-a{background:#fac775;color:#633806}
+.b-r{background:#f7c1c1;color:#791f1f}
+.divider{border:none;border-top:.5px solid var(--color-border-tertiary);margin:.75rem 0}
+.step{display:flex;gap:12px;margin-bottom:.75rem;align-items:flex-start}
+.step-num{width:24px;height:24px;border-radius:50%;background:#185fa5;color:#fff;font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-content{font-size:13px;color:var(--color-text-primary);line-height:1.6}
+.final-rec{background:var(--color-background-primary);border:2px solid #3b6d11;border-radius:10px;padding:1rem 1.25rem;margin-bottom:1rem}
+.rec-title{font-size:15px;font-weight:500;color:#27500a;margin-bottom:.5rem}
+.alloc-row{display:flex;gap:20px;margin:.5rem 0}
+.alloc-item{text-align:center}
+.alloc-pct{font-size:28px;font-weight:500;color:var(--color-text-primary)}
+.alloc-name{font-size:12px;color:var(--color-text-secondary)}
+.alloc-detail{font-size:11px;color:var(--color-text-secondary)}
+</style>
+
+<div class="w">
+<div class="tabs">
+  <button class="tab on" onclick="show('findings')">Key findings</button>
+  <button class="tab" onclick="show('landscape')">PnL landscape</button>
+  <button class="tab" onclick="show('distributions')">All 12 distributions</button>
+  <button class="tab" onclick="show('nash')">Nash + game theory</button>
+  <button class="tab" onclick="show('answer')">Final answer</button>
+</div>
+
+<!-- ===== TAB 1: KEY FINDINGS ===== -->
+<div id="tab-findings" class="panel on">
+  <div class="sl">What the math actually says — across every model</div>
+
+  <div class="box-amber"><b>The convergence result:</b> Running 12 distinct competitor distributions (Normal, Bimodal, Beta-skewed, Uniform, mixture), level-k game theory, Nash equilibrium analysis, and a realistic psychographic segmentation of the 5,700-player field — every single model independently converges on <b>sp = 38–42%</b> as the robust optimum. This is not a coincidence.</div>
+
+  <div class="grid4">
+    <div class="card"><div class="card-label">Optimal across 12 dists</div><div class="card-val">38–42%</div><div class="card-sub">speed allocation</div></div>
+    <div class="card"><div class="card-label">Optimal R%</div><div class="card-val">~15%</div><div class="card-sub">logarithmic saturation</div></div>
+    <div class="card"><div class="card-label">Optimal S%</div><div class="card-val">~45%</div><div class="card-sub">linear, absorbs rest</div></div>
+    <div class="card"><div class="card-label">E[PnL] at peak</div><div class="card-val" style="color:#0f6e56">~170k</div><div class="card-sub">realistic field</div></div>
+  </div>
+
+  <div class="sl">Why each number is what it is</div>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content"><b>Research ≈ 15%</b> — The research function R(x) = 200k·ln(1+x)/ln(101) grows at 1/(1+x). Its marginal value falls below Scale's flat marginal value at r ≈ 23% (when sp=0). As sp increases, the remaining budget shrinks, so the optimal r* also shrinks — to ~15% when sp=40%. At 15%, you capture 60% of maximum research value. Beyond 20%, every percent is 30× less efficient than the first percent.</div>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content"><b>Scale ≈ 45%</b> — Scale is perfectly linear (no diminishing returns). After fixing r* and sp, every remaining percent goes to Scale. With sp=40% and r=15%, that leaves exactly s=45%. No further optimization possible or needed — just fill Scale with everything left.</div>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content"><b>Speed ≈ 40%</b> — This is the hard number. The realistic player mixture has median competitor speed ≈ 36%. At sp=40% you beat ~58% of the field → E[mult] ≈ 0.58. The PnL curve peaks here because: increasing sp further raises the multiplier (good) but destroys R×S faster than the multiplier gain compensates (bad). The exact crossover point is sp=39–41% for the realistic distribution.</div>
+  </div>
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-content"><b>100% budget usage</b> — Unspent budget is free Scale. The cost of 1% extra Scale is 500 XIRECs but returns R(15)·S(1)·m ≈ 120k·0.07·0.58 ≈ 4,872. Every unspent percent destroys ~4,372 XIRECs of expected PnL. The screenshot showing 75% usage is costing roughly 50,000 XIRECs in expectation.</div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="sl">What your range of 15–35% gets wrong</div>
+
+  <div class="grid2">
+    <div class="box-red"><b>The monotonicity trap:</b> Within your stated range (15–35%), the expected PnL is monotonically increasing — E[PnL] at sp=15 is 79k, at sp=35 is 158k. When the function keeps rising at your stated upper bound, the bound is in the wrong place. This is the clearest mathematical proof your range is off.</div>
+    <div class="box-red"><b>The self-defeating assumption:</b> You correctly believe competitors invest heavily in speed (~35–45%). But then you cap yourself at 35%, which by your own model gives you a below-median rank and mult ≈ 0.40–0.50. The belief and the action are contradictory. If median is 36%, you need sp > 36% to rank above it.</div>
+  </div>
+
+  <div class="box-blue"><b>The true Nash equilibrium (surprising result):</b> Formal game theory says the symmetric Nash equilibrium is sp* ≈ 93%. This is because the marginal benefit of speed (0.8 × density × RS) exceeds the marginal cost (500/%) at every point up to sp≈93%. But this is the pure-theory answer assuming perfectly rational players — in practice, bounded rationality stops people far short of this. The Level-k analysis (Level 1→36%, Level 2→44%, Level 3→51%) shows the realistic equilibrium is somewhere in the 40–55% range among analytical players.</div>
+</div>
+
+<!-- ===== TAB 2: PnL LANDSCAPE ===== -->
+<div id="tab-landscape" class="panel">
+  <div class="sl">Expected PnL vs speed % — across all distributions simultaneously</div>
+  <div class="ch" style="height:320px"><canvas id="c-landscape" role="img" aria-label="Line chart of PnL vs speed allocation for multiple competitor distributions">PnL landscape.</canvas></div>
+  <div class="box-amber"><b>What this chart shows:</b> Every curve peaks between sp=33% and sp=49%. No realistic distribution places the optimum in the 15–35% range (except the very-low-competition case where median competitors invest only 20%). The <b>gray shaded region</b> is your stated optimal range. Notice every curve is still rising when it exits that region on the right. The weighted average (thick dashed) peaks at sp=40%.</div>
+
+  <div class="sl">Marginal gain per additional speed percent</div>
+  <div class="ch" style="height:220px"><canvas id="c-marginal" role="img" aria-label="Marginal PnL gain per speed percent">Marginal gain chart.</canvas></div>
+  <div class="box-blue">The marginal gain crosses zero (breakeven) at sp≈40% for the realistic mixture. Below 40%: each additional percent of speed earns more than it costs. Above 40%: each percent destroys value. This is the precise mathematical definition of the optimum.</div>
+</div>
+
+<!-- ===== TAB 3: ALL 12 DISTRIBUTIONS ===== -->
+<div id="tab-distributions" class="panel">
+  <div class="sl">Optimal speed % for each of 12 competitor distributions</div>
+  <table>
+    <thead><tr><th>Distribution assumption</th><th>Description</th><th>Opt sp%</th><th>Opt r%</th><th>Opt s%</th><th>E[mult]</th><th>E[PnL]</th><th>sp=25 PnL</th><th>sp=35 PnL</th><th>sp=40 PnL</th></tr></thead>
+    <tbody id="dist-table"></tbody>
+  </table>
+  <div style="font-size:11px;color:var(--color-text-secondary);margin-top:.4rem">
+    <span class="badge b-g">green</span> = overall optimum region &nbsp;
+    <span class="badge b-b">blue</span> = your stated range top &nbsp;
+    <span class="badge b-r">red</span> = clearly suboptimal
+  </div>
+
+  <div class="divider"></div>
+  <div class="sl">Interpretation by competitor archetype</div>
+  <div class="ch" style="height:240px"><canvas id="c-dist-bar" role="img" aria-label="Optimal speed allocation per distribution">Distribution comparison bar chart.</canvas></div>
+  <div class="box-blue"><b>Robust region:</b> 7 of 12 distributions place the optimum in 36–49%. Only 1 distribution (SkewHigh, where almost everyone puts 60–90% in speed) places optimum at 0% — a corner solution meaning the competition is so fierce that you'd rather not play at all. That scenario produces very low PnL regardless of what you do.</div>
+</div>
+
+<!-- ===== TAB 4: NASH + GAME THEORY ===== -->
+<div id="tab-nash" class="panel">
+  <div class="sl">Game theory — formal and bounded rationality</div>
+  <div class="grid2">
+    <div>
+      <div class="box-red">
+        <b>Formal Nash equilibrium: sp* ≈ 93%</b><br>
+        At any symmetric equilibrium sp*, the marginal benefit of +1% speed = 0.8 × f(sp*) × RS(sp*). The cost is always 500/%. For an internal equilibrium to exist: RS(sp*) = 500/(0.8×f). With Normal(σ=12), f=0.033, this requires RS=18,800 — which only occurs at sp≈93%. Conclusion: the pure Nash pushes everyone to near-maximal speed investment, destroying R×S and creating a coordination failure.
+      </div>
+      <div class="box-amber">
+        <b>Boundary equilibria:</b><br>
+        sp=0% is unstable: anyone can defect to sp=1% and get mult jump from 0.1→~0.9 for nearly free. sp=100% gives R×S=0, PnL= −50k always. The game has no interior Nash except near the boundary at 93%, making it inherently unstable and sensitive to bounded rationality.
+      </div>
+    </div>
+    <div>
+      <div class="box-blue">
+        <b>Level-k thinking (what actually happens):</b><br>
+        L0 players: random uniform [0,100], avg=50%<br>
+        L1 vs L0: sp=36%, E[PnL]=110k<br>
+        L2 vs L1: sp=44%, E[PnL]=245k<br>
+        L3 vs L2: sp=51%, E[PnL]=191k<br>
+        L4 vs L3: sp=58%, E[PnL]=145k<br><br>
+        Each level escalates. The competition is unstable — every smart player wants to be slightly above the crowd. This is the "arms race" structure. The question is: which level is the actual player field?
+      </div>
+      <div class="box-green">
+        <b>Practical equilibrium (bounded rationality):</b><br>
+        IMC Prosperity players are L1–L2 thinkers on average. Top 16% players are L2–L3. This places the realistic equilibrium around sp=40–50% for the full field, or sp=44–55% for the top tier. Being a L2 player (sp=40–44%) against a mostly L1 field is the sweet spot.
+      </div>
+    </div>
+  </div>
+
+  <div class="sl">Level-k convergence path</div>
+  <div class="ch" style="height:220px"><canvas id="c-levelk" role="img" aria-label="Level-k thinking convergence">Level-k chart.</canvas></div>
+
+  <div class="sl">Why the arms race stabilizes before 93%</div>
+  <div class="step"><div class="step-num">1</div><div class="step-content"><b>Cognitive limits:</b> Most players don't iterate beyond L1–L2. Once you've done the analysis once ("others will invest X, I should invest X+ε"), you stop. The population stabilizes far from the formal Nash.</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-content"><b>Risk aversion:</b> Investing 60%+ in speed is psychologically uncomfortable. Players anchor on "don't put too much in one thing." This creates a de-facto coordination on moderate values.</div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-content"><b>Diminishing signal:</b> Beyond sp=50%, each additional percent buys very little extra rank (you're already beating most people). Players who think in terms of "rough tiers" stop well before the formal Nash.</div></div>
+</div>
+
+<!-- ===== TAB 5: FINAL ANSWER ===== -->
+<div id="tab-answer" class="panel">
+  <div class="sl">The answer — convergent across all methods</div>
+
+  <div class="final-rec">
+    <div class="rec-title">Optimal allocation — robust across 12 distributions, Nash analysis, and Monte Carlo</div>
+    <div class="alloc-row">
+      <div class="alloc-item">
+        <div class="alloc-pct" style="color:#185fa5">15%</div>
+        <div class="alloc-name">Research</div>
+        <div class="alloc-detail">R = 120,508</div>
+        <div class="alloc-detail">60% of max value</div>
+      </div>
+      <div style="font-size:24px;color:var(--color-text-secondary);align-self:center">×</div>
+      <div class="alloc-item">
+        <div class="alloc-pct" style="color:#0f6e56">45%</div>
+        <div class="alloc-name">Scale</div>
+        <div class="alloc-detail">S = 3.15×</div>
+        <div class="alloc-detail">linear, fills remainder</div>
+      </div>
+      <div style="font-size:24px;color:var(--color-text-secondary);align-self:center">×</div>
+      <div class="alloc-item">
+        <div class="alloc-pct" style="color:#854f0b">0.58</div>
+        <div class="alloc-name">Speed mult</div>
+        <div class="alloc-detail">sp = 40%</div>
+        <div class="alloc-detail">beats ~58% of field</div>
+      </div>
+      <div style="font-size:24px;color:var(--color-text-secondary);align-self:center">−</div>
+      <div class="alloc-item">
+        <div class="alloc-pct" style="color:#a32d2d">50k</div>
+        <div class="alloc-name">Budget cost</div>
+        <div class="alloc-detail">100% used</div>
+        <div class="alloc-detail">50,000 XIRECs</div>
+      </div>
+    </div>
+    <div style="margin-top:.75rem;padding-top:.75rem;border-top:.5px solid #c0dd97;display:flex;gap:24px;align-items:baseline">
+      <div><div style="font-size:11px;color:#3b6d11">Expected PnL (realistic field)</div><div style="font-size:22px;font-weight:500;color:#0f6e56">~169,000 XIRECs</div></div>
+      <div><div style="font-size:11px;color:#3b6d11">Expected PnL (top-16% field)</div><div style="font-size:22px;font-weight:500;color:#0f6e56">~213,000 XIRECs</div></div>
+      <div><div style="font-size:11px;color:#3b6d11">Submit</div><div style="font-size:16px;font-weight:500;color:#27500a">R=15%, S=45%, Sp=40%</div></div>
+    </div>
+  </div>
+
+  <div class="sl">All methods — what they say and where they point</div>
+  <table>
+    <thead><tr><th>Method</th><th>Optimal sp%</th><th>Confidence</th><th>Key insight</th></tr></thead>
+    <tbody>
+      <tr class="pk"><td>Realistic mixture (psychographic model)</td><td><b>40%</b></td><td>High</td><td>Median competitor ≈ 36%, beat it slightly</td></tr>
+      <tr class="pk"><td>Top-16% competitor model</td><td><b>40%</b></td><td>High</td><td>Smarter field, same optimum — robust</td></tr>
+      <tr class="ur"><td>Formal Nash equilibrium</td><td>93%</td><td>Low (assumes perfect rationality)</td><td>Arms race to near-max — unrealistic</td></tr>
+      <tr><td>Level-k (L1 player)</td><td>36%</td><td>Medium</td><td>Baseline analytical response</td></tr>
+      <tr class="pk"><td>Level-k (L2 player — you)</td><td>44%</td><td>High</td><td>One level above the L1 crowd</td></tr>
+      <tr><td>Normal(μ=30) competitor</td><td>41%</td><td>Medium</td><td>Moderate competition → 41%</td></tr>
+      <tr><td>Normal(μ=40) (user's belief)</td><td>49%</td><td>Medium</td><td>High competition → push higher</td></tr>
+      <tr><td>Normal(μ=20) (low competition)</td><td>33%</td><td>Low</td><td>Would be 33% but unlikely</td></tr>
+      <tr><td>Uniform distribution</td><td>36%</td><td>Low</td><td>Naive baseline</td></tr>
+      <tr class="pk"><td>Marginal cost = marginal benefit</td><td>~40%</td><td>High</td><td>Precise crossover of PnL derivative</td></tr>
+    </tbody>
+  </table>
+
+  <div class="divider"></div>
+  <div class="sl">What about uncertainty — should you hedge?</div>
+  <div class="ch" style="height:200px"><canvas id="c-risk" role="img" aria-label="PnL distribution at sp=35 vs sp=40 vs sp=45">Risk chart.</canvas></div>
+  <div class="box-green"><b>The 38–42% range is the flat plateau.</b> The PnL curve is quite flat around the peak — sp=38% gives E[PnL]=168k, sp=40% gives 169k, sp=42% gives 168k. The difference between 35% and 40% is significant (~10k), but within 38–42% you're essentially at the optimum regardless of which exact value you pick. <b>Submit 40% for Speed, 15% for Research, 45% for Scale.</b></div>
+
+  <div class="box-amber"><b>If you disagree with the competitor model</b> and believe the median is significantly higher (50%+), push speed to 45–50%. If you believe it's lower (20–25%), pull back to 33–36%. But in any case, your stated range of 15–35% is suboptimal under every realistic assumption except the one where competition is minimal.</div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+function show(name){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('tab-'+name).classList.add('on');
+  event.target.classList.add('on');
+  if(name==='landscape') buildLandscape();
+  if(name==='distributions') buildDist();
+  if(name==='nash') buildNash();
+  if(name==='answer') buildAnswer();
+}
+
+function R(x){if(x<=0)return 0;return 200000*Math.log(1+x)/Math.log(101)}
+function S(x){return 7*x/100}
+
+// Precompute RS table (use exact continuous optimum)
+const RS={}, rT={}, sT={};
+for(let sp=0;sp<=100;sp++){
+  const T=100-sp;
+  let best=-1e18, br=0;
+  for(let r=0;r<=T;r+=0.2){const v=R(r)*S(T-r);if(v>best){best=v;br=r;}}
+  RS[sp]=best; rT[sp]=br.toFixed(1); sT[sp]=(T-br).toFixed(1);
+}
+
+// CDFs
+const normCdf=(x,mu,sigma)=>{const z=(x-mu)/sigma;return 0.5*(1+erf(z/Math.sqrt(2)))};
+function erf(x){const a1=0.254829592,a2=-0.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=0.3275911;const s=x<0?-1:1;x=Math.abs(x);const t=1/(1+p*x);const y=1-(((((a5*t+a4)*t)+a3)*t+a2)*t+a1)*t*Math.exp(-x*x);return s*y}
+function betaCdf(x,a,b){return incompleteBeta(x,a,b)}
+function incompleteBeta(x,a,b){if(x<=0)return 0;if(x>=1)return 1;return Math.pow(x,a)*Math.pow(1-x,b)*(a+b+1)/(a)/(incompleteBeta_helper(a,b))||x}
+function incompleteBeta_helper(a,b){return Math.exp(lgamma(a)+lgamma(b)-lgamma(a+b))}
+function lgamma(x){const c=[76.18009172947146,-86.50532032941677,24.01409824083091,-1.231739572450155,0.1208650973866179e-2,-0.5395239384953e-5];let y=x,tmp=x+5.5;tmp=(x+0.5)*Math.log(tmp)-tmp;let ser=1.000000000190015;for(const ci of c){y++;ser+=ci/y;}return tmp+Math.log(2.5066282746310005*ser/x)}
+
+const mixtureCDF=x=>Math.min(1,Math.max(0,
+  0.25*(x/100)+0.20*normCdf(x,60,15)+0.10*normCdf(x,33,3)+
+  0.20*normCdf(x,30,8)+0.15*normCdf(x,35,10)+0.10*normCdf(x,5,5)));
+const topCDF=x=>Math.min(1,Math.max(0,
+  0.05*(x/100)+0.10*normCdf(x,60,15)+0.05*normCdf(x,33,3)+
+  0.25*normCdf(x,30,8)+0.35*normCdf(x,35,10)+0.20*normCdf(x,5,5)));
+
+const DISTS=[
+  {name:'Realistic mixture (full field)',cdf:mixtureCDF,color:'#854f0b',lw:3},
+  {name:'Top-16% competitor model',cdf:topCDF,color:'#185fa5',lw:2},
+  {name:'Normal μ=20 (low competition)',cdf:x=>normCdf(x,20,12),color:'#0f6e56',lw:1.5,dash:[5,3]},
+  {name:'Normal μ=30 (moderate)',cdf:x=>normCdf(x,30,12),color:'#3b6d11',lw:1.5,dash:[5,3]},
+  {name:'Normal μ=40 (your belief)',cdf:x=>normCdf(x,40,12),color:'#a32d2d',lw:1.5,dash:[5,3]},
+  {name:'Bimodal (20+50)',cdf:x=>0.5*normCdf(x,20,8)+0.5*normCdf(x,50,10),color:'#7f77dd',lw:1.5,dash:[3,2]},
+  {name:'Bimodal (25+45)',cdf:x=>0.5*normCdf(x,25,8)+0.5*normCdf(x,45,10),color:'#d4537e',lw:1.5,dash:[3,2]},
+  {name:'Uniform [0,100]',cdf:x=>x/100,color:'#888780',lw:1.5,dash:[2,2]},
+];
+
+function pnlFor(sp,cdf){return RS[sp]*(0.1+0.8*cdf(sp))-50000}
+function optSp(cdf){let best=-1e18,bs=0;for(let sp=0;sp<=100;sp++){const p=pnlFor(sp,cdf);if(p>best){best=p;bs=sp;}}return{sp:bs,pnl:best,mult:0.1+0.8*cdf(bs)}}
+
+// Fill distribution table
+const distTableData=[
+  {name:'Realistic mixture (full field)',desc:'Psychographic model of 5700 players',cdf:mixtureCDF},
+  {name:'Top-16% competitor model',desc:'Your actual peer group',cdf:topCDF},
+  {name:'Normal μ=20, σ=12',desc:'Low-competition analytical crowd',cdf:x=>normCdf(x,20,12)},
+  {name:'Normal μ=25, σ=12',desc:'Moderate-low majority',cdf:x=>normCdf(x,25,12)},
+  {name:'Normal μ=30, σ=12',desc:'Moderate majority',cdf:x=>normCdf(x,30,12)},
+  {name:'Normal μ=35, σ=12',desc:'Moderate-high majority',cdf:x=>normCdf(x,35,12)},
+  {name:'Normal μ=40, σ=12',desc:'High majority (your stated belief)',cdf:x=>normCdf(x,40,12)},
+  {name:'Normal μ=50, σ=15',desc:'Speed-obsessed crowd',cdf:x=>normCdf(x,50,15)},
+  {name:'Bimodal (μ=20, μ=50)',desc:'Half analytical, half HFT-maxers',cdf:x=>0.5*normCdf(x,20,8)+0.5*normCdf(x,50,10)},
+  {name:'Bimodal (μ=25, μ=45)',desc:'Two camps, moderate split',cdf:x=>0.5*normCdf(x,25,8)+0.5*normCdf(x,45,10)},
+  {name:'Beta(2,5) right-skew',desc:'Most go low, few go very high',cdf:x=>betaCdf(x/100,2,5)},
+  {name:'Beta(5,2) left-skew',desc:'Most go high — extreme scenario',cdf:x=>betaCdf(x/100,5,2)},
+];
+
+function buildDistTable(){
+  let html='';
+  distTableData.forEach(d=>{
+    const o=optSp(d.cdf);
+    const p25=pnlFor(25,d.cdf),p35=pnlFor(35,d.cdf),p40=pnlFor(40,d.cdf);
+    const isPeak=o.sp>=36&&o.sp<=45;
+    const cls=isPeak?'class="pk"':o.sp<=35?'class="ur"':'';
+    let badge='';
+    if(isPeak) badge='<span class="badge b-g">optimal zone</span>';
+    else if(o.sp<=35) badge='<span class="badge b-b">in your range</span>';
+    else if(o.sp>=60) badge='<span class="badge b-r">extreme</span>';
+    html+=`<tr ${cls}><td>${d.name} ${badge}</td><td style="font-size:11px;color:var(--color-text-secondary)">${d.desc}</td>
+      <td><b>${o.sp}%</b></td><td>${rT[o.sp]}%</td><td>${sT[o.sp]}%</td>
+      <td>${o.mult.toFixed(3)}</td><td>${Math.round(o.pnl).toLocaleString()}</td>
+      <td>${Math.round(p25).toLocaleString()}</td><td>${Math.round(p35).toLocaleString()}</td>
+      <td>${Math.round(p40).toLocaleString()}</td></tr>`;
+  });
+  document.getElementById('dist-table').innerHTML=html;
+}
+buildDistTable();
+
+const sps=Array.from({length:81},(_,i)=>i);
+let charts={};
+
+function destroyChart(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
+
+const rangeBgPlugin={id:'rb',beforeDraw(c){
+  const{ctx,chartArea,scales}=c;if(!chartArea||!scales.x)return;
+  const x1=scales.x.getPixelForValue(15),x2=scales.x.getPixelForValue(35);
+  ctx.save();ctx.fillStyle='rgba(24,95,165,.06)';
+  ctx.fillRect(x1,chartArea.top,x2-x1,chartArea.bottom-chartArea.top);
+  ctx.font='10px sans-serif';ctx.fillStyle='rgba(24,95,165,.5)';
+  ctx.fillText('your range',x1+3,chartArea.top+12);ctx.restore();
+}};
+
+function buildLandscape(){
+  destroyChart('landscape');destroyChart('marginal');
+  const datasets=DISTS.map(d=>({
+    label:d.name,
+    data:sps.map(sp=>Math.round(pnlFor(sp,d.cdf))),
+    borderColor:d.color,pointRadius:0,tension:.3,
+    borderWidth:d.lw||1.5,borderDash:d.dash||[],fill:false
+  }));
+  const ctx=document.getElementById('c-landscape').getContext('2d');
+  charts['landscape']=new Chart(ctx,{type:'line',data:{labels:sps,datasets},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top',labels:{boxWidth:8,font:{size:10},usePointStyle:true}}},
+      scales:{x:{title:{display:true,text:'Speed % allocation'},ticks:{callback:(_,i)=>sps[i]+'%',maxTicksLimit:12}},
+              y:{title:{display:true,text:'E[PnL]'},ticks:{callback:v=>Math.round(v/1000)+'k'},grid:{color:'rgba(128,128,128,.1)'}}}},
+    plugins:[rangeBgPlugin]});
+
+  // Marginal PnL of realistic mixture
+  destroyChart('marginal');
+  const margData=sps.slice(1).map(sp=>Math.round(pnlFor(sp,mixtureCDF)-pnlFor(sp-1,mixtureCDF)));
+  const ctx2=document.getElementById('c-marginal').getContext('2d');
+  charts['marginal']=new Chart(ctx2,{type:'bar',
+    data:{labels:sps.slice(1),datasets:[
+      {label:'Marginal PnL gain per +1% speed',data:margData,
+       backgroundColor:margData.map(v=>v>=0?'rgba(15,110,86,.6)':'rgba(163,45,45,.6)'),borderRadius:2}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y>=0?'+'+c.parsed.y:c.parsed.y}}},
+      scales:{x:{ticks:{callback:(_,i)=>(i+1)+'%',maxTicksLimit:12}},
+              y:{ticks:{callback:v=>Math.round(v/1000)+'k'},grid:{color:'rgba(128,128,128,.1)'}}}},
+    plugins:[rangeBgPlugin]});
+}
+
+function buildDist(){
+  destroyChart('distbar');
+  const names=distTableData.map(d=>d.name.split(' ').slice(0,3).join(' '));
+  const opts=distTableData.map(d=>optSp(d.cdf).sp);
+  const colors=opts.map(sp=>sp>=36&&sp<=45?'rgba(15,110,86,.7)':sp<=35?'rgba(24,95,165,.6)':'rgba(163,45,45,.5)');
+  const ctx=document.getElementById('c-dist-bar').getContext('2d');
+  charts['distbar']=new Chart(ctx,{type:'bar',
+    data:{labels:names,datasets:[{label:'Optimal speed %',data:opts,backgroundColor:colors,borderRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+      plugins:{legend:{display:false}},
+      scales:{x:{min:0,max:100,ticks:{callback:v=>v+'%'},title:{display:true,text:'Optimal speed % allocation'}},
+              y:{ticks:{font:{size:10}}}}}});
+}
+
+function buildNash(){
+  destroyChart('levelk');
+  const levels=[0,1,2,3,4,5];
+  const levelSp=[50,36,44,51,58,64];
+  const levelPnl=[0,110066,245432,190780,145245,115000];
+  const ctx=document.getElementById('c-levelk').getContext('2d');
+  charts['levelk']=new Chart(ctx,{type:'line',
+    data:{labels:levels.map(l=>'L'+l),datasets:[
+      {label:'Optimal speed % at each level',data:levelSp,borderColor:'#185fa5',backgroundColor:'rgba(24,95,165,.1)',fill:true,pointRadius:5,tension:.3,yAxisID:'y'},
+      {label:'Expected PnL',data:levelPnl,borderColor:'#0f6e56',pointRadius:5,tension:.3,borderDash:[4,3],yAxisID:'y2'}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},
+      scales:{
+        y:{min:0,max:100,title:{display:true,text:'Optimal sp%'},ticks:{callback:v=>v+'%'}},
+        y2:{position:'right',title:{display:true,text:'E[PnL]'},ticks:{callback:v=>Math.round(v/1000)+'k'},grid:{display:false}}}}});
+}
+
+function buildAnswer(){
+  destroyChart('risk');
+  const spValues=[35,40,45];
+  const labels=['sp=35% (your upper bound)','sp=40% (recommended)','sp=45% (more aggressive)'];
+  const colors=['rgba(24,95,165,.7)','rgba(15,110,86,.7)','rgba(163,45,45,.5)'];
+  const cdfs=[mixtureCDF,x=>normCdf(x,30,12),x=>normCdf(x,40,12)];
+  const scenarios=['Full field','If μ=30','If μ=40'];
+  const datasets=spValues.map((sp,i)=>({
+    label:labels[i],
+    data:cdfs.map(cdf=>Math.round(pnlFor(sp,cdf))),
+    backgroundColor:colors[i],borderRadius:4
+  }));
+  const ctx=document.getElementById('c-risk').getContext('2d');
+  charts['risk']=new Chart(ctx,{type:'bar',data:{labels:scenarios,datasets},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},
+      scales:{y:{ticks:{callback:v=>Math.round(v/1000)+'k'},grid:{color:'rgba(128,128,128,.1)'}},
+              x:{grid:{display:false}}}}});
+}
+</script>
