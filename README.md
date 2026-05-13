@@ -1,6 +1,6 @@
-# IMC Prosperity 4 - Team ABSOLUTECINEMA
+# IMC Prosperity 4 - Team Noisy_room
 
-All the data, algorithms, analysis tools, and learning resources for our team "ABSOLUTECINEMA" participating in IMC Prosperity 4 2026.
+All the data, algorithms, analysis tools, and learning resources for our team "Noisy_room" participating in IMC Prosperity 4 2026.
 
 ## 📋 Quick Overview
 
@@ -274,6 +274,6 @@ See `/other/optimizations.md` for curated LLM conversation links:
 
 ---
 
-## 👥 Team: AbsoluteCinema
+## 👥 Team: Noisy_room
 
 All documentation maintained for transparent strategy development and knowledge sharing.
